@@ -19,7 +19,7 @@
   background: black;
   overflow: hidden;
   backface-visibility: hidden;
-  transition: transform 1s;
+  transition: transform 5s ease;
   transform: rotateY(0);
 }
 /* line 18, ../sass/opusFlux/_opusFlux-plugin.sass */
@@ -250,4 +250,9 @@ body {
 body {
   padding: 25px;
   background: #2f2f2f;
+}
+
+/* line 13, ../sass/demo/_demo.sass */
+.preload * {
+  transition: none !important;
 }
