@@ -1,0 +1,253 @@
+/* line 1, ../sass/opusFlux/_opusFlux-plugin.sass */
+.OpusFlux-Book {
+  width: 800px;
+  max-width: 100%;
+  perspective: 1600;
+}
+/* line 6, ../sass/opusFlux/_opusFlux-plugin.sass */
+.OpusFlux-Book:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* line 11, ../sass/opusFlux/_opusFlux-plugin.sass */
+.OpusFlux-Page {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  background: black;
+  overflow: hidden;
+  backface-visibility: hidden;
+  transition: transform 1s;
+  transform: rotateY(0);
+}
+/* line 18, ../sass/opusFlux/_opusFlux-plugin.sass */
+.OpusFlux-Page img {
+  width: 100%;
+}
+
+/* line 28, ../sass/opusFlux/_opusFlux-plugin.sass */
+.OpusFlux-Page:nth-child(2) {
+  float: left;
+  position: relative;
+}
+
+/* line 33, ../sass/opusFlux/_opusFlux-plugin.sass */
+.OpusFlux-Page:nth-child(2n) {
+  transform-origin: 100%;
+  left: 0;
+}
+
+/* line 38, ../sass/opusFlux/_opusFlux-plugin.sass */
+.OpusFlux-Page:nth-child(2n+1) {
+  transform-origin: 0;
+  right: 0;
+  transform: rotateY(-180deg);
+}
+
+/* line 46, ../sass/opusFlux/_opusFlux-plugin.sass */
+.OpusFlux-Page.is-active {
+  z-index: 2;
+}
+
+/* line 51, ../sass/opusFlux/_opusFlux-plugin.sass */
+.OpusFlux-Page.is-active:nth-child(2n+1) {
+  transform: rotateY(0);
+}
+
+/* line 55, ../sass/opusFlux/_opusFlux-plugin.sass */
+.OpusFlux-Page.is-active:nth-child(2n+1) ~ .OpusFlux-Page:nth-child(2n) {
+  transform: rotateY(180deg);
+}
+
+/* line 59, ../sass/opusFlux/_opusFlux-plugin.sass */
+.OpusFlux-Page.is-active:nth-child(2n+1) ~ .OpusFlux-Page:nth-child(2n+1) {
+  transform: rotateY(0);
+}
+
+/* line 63, ../sass/opusFlux/_opusFlux-plugin.sass */
+.OpusFlux-Page.was-active {
+  z-index: 1;
+}
+
+/* line 66, ../sass/opusFlux/_opusFlux-plugin.sass */
+.OpusFlux-Page.is-animating:nth-child(2n+1) {
+  z-index: 4;
+}
+
+/* line 69, ../sass/opusFlux/_opusFlux-plugin.sass */
+.OpusFlux-Page.is-animating:nth-child(2n+1) ~ .OpusFlux-Page.is-animating {
+  z-index: 3;
+}
+
+/* line 73, ../sass/opusFlux/_opusFlux-plugin.sass */
+.OpusFlux-Spread {
+  width: 200%;
+}
+
+/* line 77, ../sass/opusFlux/_opusFlux-plugin.sass */
+.OpusFlux-Page--with-Spread:nth-child(2n+1) .OpusFlux-Spread {
+  margin-left: -100%;
+}
+
+/* line 1, ../sass/opusFlux/_opusFlux-skin.sass */
+.OpusFlux-Book {
+  max-width: 100%;
+  margin: 0 auto;
+  top: 50%;
+  margin-top: -150px;
+  background: #333333;
+}
+/* line 8, ../sass/opusFlux/_opusFlux-skin.sass */
+.OpusFlux-Book:before {
+  content: "Click the cover to open";
+  position: absolute;
+  width: 50%;
+  text-align: center;
+  top: 50%;
+  margin-top: -20px;
+  line-height: 22px;
+  font-size: 22px;
+  color: #777777;
+}
+
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+/* line 8, ../sass/demo/_prism.scss */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #f8f8f2;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+  font-family: Consolas, Monaco, 'Andale Mono', monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+/* line 29, ../sass/demo/_prism.scss */
+pre[class*="language-"] {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+}
+
+/* line 36, ../sass/demo/_prism.scss */
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: #222;
+}
+
+/* Inline code */
+/* line 41, ../sass/demo/_prism.scss */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+}
+
+/* line 48, ../sass/demo/_prism.scss */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: slategray;
+}
+
+/* line 52, ../sass/demo/_prism.scss */
+.token.punctuation {
+  color: #f8f8f2;
+}
+
+/* line 56, ../sass/demo/_prism.scss */
+.namespace {
+  opacity: .7;
+}
+
+/* line 63, ../sass/demo/_prism.scss */
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol {
+  color: #f92672;
+}
+
+/* line 68, ../sass/demo/_prism.scss */
+.token.boolean,
+.token.number {
+  color: #ae81ff;
+}
+
+/* line 75, ../sass/demo/_prism.scss */
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.builtin {
+  color: #a6e22e;
+}
+
+/* line 85, ../sass/demo/_prism.scss */
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+  color: #f8f8f2;
+}
+
+/* line 91, ../sass/demo/_prism.scss */
+.token.atrule,
+.token.attr-value {
+  color: #e6db74;
+}
+
+/* line 96, ../sass/demo/_prism.scss */
+.token.keyword {
+  color: #66d9ef;
+}
+
+/* line 101, ../sass/demo/_prism.scss */
+.token.regex,
+.token.important {
+  color: #fd971f;
+}
+
+/* line 105, ../sass/demo/_prism.scss */
+.token.important {
+  font-weight: bold;
+}
+
+/* line 109, ../sass/demo/_prism.scss */
+.token.entity {
+  cursor: help;
+}
+
+/* line 1, ../sass/demo/_demo.sass */
+* {
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* line 5, ../sass/demo/_demo.sass */
+html,
+body {
+  height: 100%;
+}
+
+/* line 9, ../sass/demo/_demo.sass */
+body {
+  padding: 25px;
+  background: #2f2f2f;
+}

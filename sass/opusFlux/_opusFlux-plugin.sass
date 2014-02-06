@@ -1,0 +1,79 @@
+.OpusFlux-Book
+  width: 800px
+  max-width: 100%
+  perspective: 1600
+
+  &:after
+    content: ''
+    display: table
+    clear: both
+
+.OpusFlux-Page
+  position: absolute
+  width: 50%
+  height: 100%
+  background: black
+  overflow: hidden
+
+  img
+    width: 100%
+
+  backface-visibility: hidden
+  transition: transform 1s
+
+  // left pages before active spread
+  // active left page
+  transform: rotateY(0)
+
+.OpusFlux-Page:nth-child(2)
+  float: left
+  position: relative
+
+// left
+.OpusFlux-Page:nth-child(2n)
+  transform-origin: 100%
+  left: 0
+
+// right pages
+.OpusFlux-Page:nth-child(2n+1)
+  transform-origin: 0
+  right: 0
+
+  // right pages before active spread
+  transform: rotateY(-180deg)
+
+// active spread
+.OpusFlux-Page.is-active
+  z-index: 2
+
+
+// active right page
+.OpusFlux-Page.is-active:nth-child(2n+1)
+  transform: rotateY(0)
+
+  // left pages after active spread
+.OpusFlux-Page.is-active:nth-child(2n+1) ~ .OpusFlux-Page:nth-child(2n)
+  transform: rotateY(180deg)
+
+// right pages after active spread
+.OpusFlux-Page.is-active:nth-child(2n+1) ~ .OpusFlux-Page:nth-child(2n+1)
+  transform: rotateY(0)
+
+// page transistioning out
+.OpusFlux-Page.was-active
+  z-index: 1
+
+.OpusFlux-Page.is-animating:nth-child(2n+1)
+  z-index: 4
+
+.OpusFlux-Page.is-animating:nth-child(2n+1) ~ .OpusFlux-Page.is-animating
+  z-index: 3
+
+// Spreads to pages
+.OpusFlux-Spread
+  width: 200%
+
+.OpusFlux-Page--with-Spread:nth-child(2n+1)
+  .OpusFlux-Spread
+    margin-left: -100%
+

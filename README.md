@@ -1,4 +1,4 @@
-opus-flux
+Opus Flux
 =========
 
-A Sass powered animated book plugin
+A Sass generated CSS3 animated book plugin

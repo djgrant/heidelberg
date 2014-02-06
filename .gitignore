@@ -1,0 +1,22 @@
+# Created by http://www.gitignore.io
+
+### SASS ###
+### Sass Ignores - "Sassy CSS" http://sass-lang.com/
+*.sass-cache
+
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must ends with two \r.
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
