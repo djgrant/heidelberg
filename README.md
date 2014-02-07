@@ -1,4 +1,4 @@
-Opus Flux
+Heidelberg
 =========
 
-A Sass generated CSS3 animated book plugin
+Heidelberg is a Sass plugin that presses CSS3 animated books.
