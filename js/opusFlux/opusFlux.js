@@ -43,7 +43,6 @@
 
   OpusFlux.prototype.init = function() {
 
-    var that = this;
     var el   = this.el;
 
     var els = {
@@ -55,12 +54,12 @@
     els.nextTrigger = els.pagesRight.add(this.options.nextButton);
 
     els.previousTrigger.on('click', function() {
-      that.turnPage('back');
-    });
+      this.turnPage('back');
+    }.bind(this));
 
     els.nextTrigger.on('click', function() {
-      that.turnPage('forwards');
-    });
+      this.turnPage('forwards');
+    }.bind(this));
 
   };
 
@@ -68,6 +67,11 @@
 
     var el = this.el;
     var els = {};
+
+    if(($('.OpusFlux-Page').last().hasClass('is-active') && direction == 'forwards')
+      || ($('.OpusFlux-Page').first().hasClass('is-active') && direction == 'back')) {
+      return
+    }
 
     els.isActive       = $('.OpusFlux-Page.is-active', el);
     els.isAnimatingOut = (direction == 'back') ? $('.OpusFlux-Page.is-active').first() : $('.OpusFlux-Page.is-active').last();
