@@ -2,7 +2,7 @@
 
   function OpusFlux(el, options) {
 
-  	// INSTANTIATION
+    // INSTANTIATION
     // Allow developer to omit new when instantiating
     if (!(this instanceof OpusFlux)) {
       if (el.length) {
@@ -19,13 +19,14 @@
     }
 
     // OPTIONS
-		var userOptions = options || {};
-		var defaults    = {};
-
-    this.options = {
-    	nextButton: $(),
-    	previousButton: $()
+    var defaults = {
+      nextButton: $(),
+      previousButton: $()
     };
+
+    var userOptions = options || {};
+
+    this.options    = {};
 
     for (var x in defaults) {
       this.options[x] = userOptions[x] || defaults[x];
@@ -42,56 +43,56 @@
 
   OpusFlux.prototype.init = function() {
 
-		var that = this;
-		var el   = this.el;
+    var that = this;
+    var el   = this.el;
 
-		var els = {
-			pagesLeft: $('.OpusFlux-Page:nth-child(2n)', el),
-			pagesRight: $('.OpusFlux-Page:nth-child(2n+1)', el)
-		};
+    var els = {
+      pagesLeft: $('.OpusFlux-Page:nth-child(2n)', el),
+      pagesRight: $('.OpusFlux-Page:nth-child(2n+1)', el)
+    };
 
-		els.previousTrigger = els.pagesLeft.add(this.options.previousButton);
-		els.nextTrigger = els.pagesRight.add(this.options.nextButton);
+    els.previousTrigger = els.pagesLeft.add(this.options.previousButton);
+    els.nextTrigger = els.pagesRight.add(this.options.nextButton);
 
-		els.previousTrigger.on('click', function() {
-		  that.turnPage('back', $(this));
-		});
+    els.previousTrigger.on('click', function() {
+      that.turnPage('back');
+    });
 
-		els.nextTrigger.on('click', function() {
-		  that.turnPage('forwards', $(this));
-		});
+    els.nextTrigger.on('click', function() {
+      that.turnPage('forwards');
+    });
 
   };
 
-  OpusFlux.prototype.turnPage = function(direction, thisEl) {
+  OpusFlux.prototype.turnPage = function(direction) {
 
-		var el = this.el;
-		var els = {};
+    var el = this.el;
+    var els = {};
 
-		els.isActive       = $('.OpusFlux-Page.is-active', el);
-		els.isAnimatingOut = thisEl;
+    els.isActive       = $('.OpusFlux-Page.is-active', el);
+    els.isAnimatingOut = (direction == 'back') ? $('.OpusFlux-Page.is-active').first() : $('.OpusFlux-Page.is-active').last();
 
-		$('.OpusFlux-Page.was-active', el).removeClass('was-active');
+    $('.OpusFlux-Page.was-active', el).removeClass('was-active');
 
-		if (direction == 'back') {
-			els.isAnimatingIn = els.isAnimatingOut.prev();
-			els.newActive     = els.isAnimatingIn.add(els.isAnimatingIn.prev());
-		}
+    if (direction == 'back') {
+      els.isAnimatingIn = els.isAnimatingOut.prev();
+      els.newActive     = els.isAnimatingIn.add(els.isAnimatingIn.prev());
+    }
 
-		if (direction == 'forwards') {
-			els.isAnimatingIn = els.isAnimatingOut.next();
-			els.newActive     = els.isAnimatingIn.add(els.isAnimatingIn.next());
-		}
+    if (direction == 'forwards') {
+      els.isAnimatingIn = els.isAnimatingOut.next();
+      els.newActive     = els.isAnimatingIn.add(els.isAnimatingIn.next());
+    }
 
-		els.isActive.removeClass('is-active').addClass('was-active');
-		els.newActive.addClass('is-active');
+    els.isActive.removeClass('is-active').addClass('was-active');
+    els.newActive.addClass('is-active');
 
-		els.isAnimating = els.isAnimatingIn.add(els.isAnimatingOut);
+    els.isAnimating = els.isAnimatingIn.add(els.isAnimatingOut);
 
-		els.isAnimating.addClass('is-animating');
-		els.isAnimating.on('webkittransitionEnd otransitionend mstransitionEnd transitionend', function () {
-		    els.isAnimating.removeClass('is-animating');
-		}.bind(document));
+    els.isAnimating.addClass('is-animating');
+    els.isAnimating.on('webkittransitionEnd otransitionend mstransitionEnd transitionend', function () {
+        els.isAnimating.removeClass('is-animating');
+    }.bind(document));
 
   };
 

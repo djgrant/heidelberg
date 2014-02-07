@@ -19,7 +19,7 @@
   background: black;
   overflow: hidden;
   backface-visibility: hidden;
-  transition: transform 5s ease;
+  transition: transform 1s ease;
   transform: rotateY(0);
 }
 /* line 18, ../sass/opusFlux/_opusFlux-plugin.sass */
