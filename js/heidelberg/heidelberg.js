@@ -63,11 +63,17 @@
     }.bind(this));
 
     if(Hammer) {
-      Hammer(els.pagesLeft).on("swiperight dragright tap", function(ev) {
+      Hammer(els.pagesLeft, {
+        drag_min_distance: 5,
+        swipe_velocity: 0.3
+      }).on("swiperight dragright tap", function(evt) {
         this.turnPage('back');
       }.bind(this));
 
-      Hammer(els.pagesRight).on("swipeleft dragleft tap", function(ev) {
+      Hammer(els.pagesRight, {
+        drag_min_distance: 5,
+        swipe_velocity: 0.3
+      }).on("swipeleft dragleft tap", function(evt) {
         this.turnPage('forwards');
       }.bind(this));
     }
