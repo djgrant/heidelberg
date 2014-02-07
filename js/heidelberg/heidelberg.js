@@ -26,7 +26,7 @@
 
     var userOptions = options || {};
 
-    this.options    = {};
+    this.options = {};
 
     for (var x in defaults) {
       this.options[x] = userOptions[x] || defaults[x];
@@ -43,6 +43,7 @@
 
   Heidelberg.prototype.init = function() {
 
+    var that = this;
     var el   = this.el;
 
     var els = {
@@ -61,6 +62,15 @@
       this.turnPage('forwards');
     }.bind(this));
 
+    if(Hammer) {
+      Hammer(els.pagesLeft).on("swiperight dragright tap", function(ev) {
+        this.turnPage('back');
+      }.bind(this));
+
+      Hammer(els.pagesRight).on("swipeleft dragleft tap", function(ev) {
+        this.turnPage('forwards');
+      }.bind(this));
+    }
   };
 
   Heidelberg.prototype.turnPage = function(direction) {
