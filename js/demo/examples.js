@@ -1,4 +1,4 @@
-new Heidelberg($('.Heidelberg-Book'), {
+Heidelberg($('.Heidelberg-Book'), {
   previousButton: $('#previous'),
   nextButton: $('#next')
 });

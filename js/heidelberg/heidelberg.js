@@ -2,12 +2,11 @@
 
   function Heidelberg(el, options) {
 
-    // INSTANTIATION
     // Allow developer to omit new when instantiating
     if (!(this instanceof Heidelberg)) {
       if (el.length) {
         Array.prototype.forEach.call(el, function(n) {
-          return new Heidelberg(el, options);
+          return new Heidelberg(n, options);
         });
       } else {
         return new Heidelberg(el, options);
@@ -62,7 +61,7 @@
       this.turnPage('forwards');
     }.bind(this));
 
-    if(Hammer) {
+    if(typeof Hammer !== 'undefined') {
       Hammer(els.pagesLeft, {
         drag_min_distance: 5,
         swipe_velocity: 0.3
@@ -84,14 +83,15 @@
     var el = this.el;
     var els = {};
 
-    if(($('.Heidelberg-Page').last().hasClass('is-active') && direction == 'forwards')
-      || ($('.Heidelberg-Page').first().hasClass('is-active') && direction == 'back')
-      || $('.Heidelberg-Page.is-animating').length > 3) {
+    if(($('.Heidelberg-Page', el).last().hasClass('is-active') && direction == 'forwards') ||
+       ($('.Heidelberg-Page', el).first().hasClass('is-active') && direction == 'back') ||
+        $('.Heidelberg-Page.is-animating', el).length > 3)
+    {
       return
     }
 
     els.isActive       = $('.Heidelberg-Page.is-active', el);
-    els.isAnimatingOut = (direction == 'back') ? $('.Heidelberg-Page.is-active').first() : $('.Heidelberg-Page.is-active').last();
+    els.isAnimatingOut = (direction == 'back') ? $('.Heidelberg-Page.is-active', el).first() : $('.Heidelberg-Page.is-active', el).last();
 
     $('.Heidelberg-Page.was-active', el).removeClass('was-active');
 
