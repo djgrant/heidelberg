@@ -69,7 +69,8 @@
     var els = {};
 
     if(($('.OpusFlux-Page').last().hasClass('is-active') && direction == 'forwards')
-      || ($('.OpusFlux-Page').first().hasClass('is-active') && direction == 'back')) {
+      || ($('.OpusFlux-Page').first().hasClass('is-active') && direction == 'back')
+      || $('.OpusFlux-Page.is-animating').length > 3) {
       return
     }
 
