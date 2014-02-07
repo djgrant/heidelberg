@@ -1,4 +1,4 @@
-new OpusFlux($('.OpusFlux-Book'), {
+new Heidelberg($('.Heidelberg-Book'), {
   previousButton: $('#previous'),
   nextButton: $('#next')
 });
