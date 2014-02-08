@@ -20,7 +20,9 @@
     // OPTIONS
     var defaults = {
       nextButton: $(),
-      previousButton: $()
+      previousButton: $(),
+      hasSpreads: false,
+      canClose: false
     };
 
     var userOptions = options || {};
@@ -42,16 +44,31 @@
 
   Heidelberg.prototype.init = function() {
 
-    var that = this;
-    var el   = this.el;
+    var el       = this.el;
+    var canClose = this.options.canClose;
+
+    if(this.options.hasSpreads || el.hasClass('with-Spreads')) {
+      this.setupSpreads();
+    }
 
     var els = {
-      pagesLeft: $('.Heidelberg-Page:nth-child(2n)', el),
-      pagesRight: $('.Heidelberg-Page:nth-child(2n+1)', el)
+      page:       $('.Heidelberg-Page', el),
+      pagesLeft:  canClose ? $('.Heidelberg-Page:nth-child(2n)', el) : $('.Heidelberg-Page:nth-child(2n+1)', el),
+      pagesRight: canClose ? $('.Heidelberg-Page:nth-child(2n+1)', el) : $('.Heidelberg-Page:nth-child(2n)', el),
     };
 
+    if(!canClose) {
+      var coverEl = $('<div />').addClass('Heidelberg-HiddenCover');
+      el.prepend(coverEl.clone());
+      el.append(coverEl.clone());
+      els.page.eq(0).add(els.page.eq(1)).addClass('is-active');
+    }
+    else {
+      els.page.eq(0).addClass('is-active');
+    }
+
     els.previousTrigger = els.pagesLeft.add(this.options.previousButton);
-    els.nextTrigger = els.pagesRight.add(this.options.nextButton);
+    els.nextTrigger     = els.pagesRight.add(this.options.nextButton);
 
     els.previousTrigger.on('click', function() {
       this.turnPage('back');
@@ -62,17 +79,15 @@
     }.bind(this));
 
     if(typeof Hammer !== 'undefined') {
-      Hammer(els.pagesLeft, {
+      opts = {
         drag_min_distance: 5,
         swipe_velocity: 0.3
-      }).on("swiperight dragright tap", function(evt) {
+      }
+      Hammer(els.pagesLeft, opts).on("dragright", function(evt) {
         this.turnPage('back');
       }.bind(this));
 
-      Hammer(els.pagesRight, {
-        drag_min_distance: 5,
-        swipe_velocity: 0.3
-      }).on("swipeleft dragleft tap", function(evt) {
+      Hammer(els.pagesRight, opts).on("dragleft", function(evt) {
         this.turnPage('forwards');
       }.bind(this));
     }
@@ -83,15 +98,17 @@
     var el = this.el;
     var els = {};
 
-    if(($('.Heidelberg-Page', el).last().hasClass('is-active') && direction == 'forwards') ||
-       ($('.Heidelberg-Page', el).first().hasClass('is-active') && direction == 'back') ||
-        $('.Heidelberg-Page.is-animating', el).length > 3)
+    els.page = $('.Heidelberg-Page', el);
+
+    if((els.page.last().hasClass('is-active') && direction == 'forwards') ||
+       (els.page.first().hasClass('is-active') && direction == 'back') ||
+        $('.Heidelberg-Page.is-animating', el).length > 4)
     {
       return
     }
 
     els.isActive       = $('.Heidelberg-Page.is-active', el);
-    els.isAnimatingOut = (direction == 'back') ? $('.Heidelberg-Page.is-active', el).first() : $('.Heidelberg-Page.is-active', el).last();
+    els.isAnimatingOut = (direction == 'back') ? els.isActive.first() : els.isActive.last();
 
     $('.Heidelberg-Page.was-active', el).removeClass('was-active');
 
@@ -116,6 +133,19 @@
     }.bind(document));
 
   };
+
+  Heidelberg.prototype.setupSpreads = function() {
+
+    var el  = this.el;
+    var els = {};
+
+    $('.Heidelberg-Spread', el).each(function() {
+      var spreadEl = $(this);
+      var pageEl   = $('<div />').addClass('Heidelberg-Page with-Spread').html(spreadEl.clone());
+      spreadEl.after(pageEl);
+      spreadEl.replaceWith(pageEl.clone());
+    });
+  }
 
   // expose Heidelberg
   window.Heidelberg = Heidelberg;

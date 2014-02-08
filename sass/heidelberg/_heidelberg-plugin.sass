@@ -1,6 +1,7 @@
+$left: even
+$right: odd
+
 .Heidelberg-Book
-  width: 800px
-  max-width: 100%
   perspective: 1600
 
   &:after
@@ -30,12 +31,12 @@
   position: relative
 
 // left
-.Heidelberg-Page:nth-child(2n)
+.Heidelberg-Page:nth-child(#{$left})
   transform-origin: 100%
   left: 0
 
 // right pages
-.Heidelberg-Page:nth-child(2n+1)
+.Heidelberg-Page:nth-child(#{$right})
   transform-origin: 0
   right: 0
 
@@ -48,32 +49,33 @@
 
 
 // active right page
-.Heidelberg-Page.is-active:nth-child(2n+1)
+.Heidelberg-Page.is-active:nth-child(#{$right})
   transform: rotateY(0)
 
   // left pages after active spread
-.Heidelberg-Page.is-active:nth-child(2n+1) ~ .Heidelberg-Page:nth-child(2n)
+.Heidelberg-Page.is-active:nth-child(#{$right}) ~ .Heidelberg-Page:nth-child(#{$left})
   transform: rotateY(180deg)
 
 // right pages after active spread
-.Heidelberg-Page.is-active:nth-child(2n+1) ~ .Heidelberg-Page:nth-child(2n+1)
+.Heidelberg-Page.is-active:nth-child(#{$right}) ~ .Heidelberg-Page:nth-child(#{$right})
   transform: rotateY(0)
 
 // page transistioning out
 .Heidelberg-Page.was-active
   z-index: 1
 
-.Heidelberg-Page.is-animating:nth-child(2n+1)
+.Heidelberg-Page.is-animating:nth-child(#{$right})
   z-index: 4
 
-.Heidelberg-Page.is-animating:nth-child(2n+1) ~ .Heidelberg-Page.is-animating
+.Heidelberg-Page.is-animating:nth-child(#{$right}) ~ .Heidelberg-Page.is-animating
   z-index: 3
 
 // Spreads to pages
 .Heidelberg-Spread
   width: 200%
+  //height: 100%
+  //transform: translateZ(0)
 
-.Heidelberg-Page--with-Spread:nth-child(2n+1)
-  .Heidelberg-Spread
-    margin-left: -100%
+.Heidelberg-Page.with-Spread:nth-child(#{$right}) .Heidelberg-Spread
+  left: -100%
 
