@@ -84,7 +84,7 @@
   width: 200%;
 }
 
-/* line 79, ../sass/heidelberg/_heidelberg-plugin.sass */
+/* line 77, ../sass/heidelberg/_heidelberg-plugin.sass */
 .Heidelberg-Page.with-Spread:nth-child(odd) .Heidelberg-Spread {
   left: -100%;
 }
