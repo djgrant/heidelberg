@@ -22,16 +22,11 @@
       nextButton: $(),
       previousButton: $(),
       hasSpreads: false,
-      canClose: false
+      canClose: false,
+      arrowKeys: true
     };
 
-    var userOptions = options || {};
-
-    this.options = {};
-
-    for (var x in defaults) {
-      this.options[x] = userOptions[x] || defaults[x];
-    }
+    this.options = $.extend({}, defaults, options);
 
     // PRIVATE VARIABLES
     // Main element always a jQuery object
@@ -45,19 +40,19 @@
   Heidelberg.prototype.init = function() {
 
     var el       = this.el;
-    var canClose = this.options.canClose;
+    var options  = this.options;
 
-    if(this.options.hasSpreads || el.hasClass('with-Spreads')) {
+    if(options.hasSpreads || el.hasClass('with-Spreads')) {
       this.setupSpreads();
     }
 
     var els = {
       page:       $('.Heidelberg-Page', el),
-      pagesLeft:  canClose ? $('.Heidelberg-Page:nth-child(2n)', el) : $('.Heidelberg-Page:nth-child(2n+1)', el),
-      pagesRight: canClose ? $('.Heidelberg-Page:nth-child(2n+1)', el) : $('.Heidelberg-Page:nth-child(2n)', el),
+      pagesLeft:  options.canClose ? $('.Heidelberg-Page:nth-child(2n)', el) : $('.Heidelberg-Page:nth-child(2n+1)', el),
+      pagesRight: options.canClose ? $('.Heidelberg-Page:nth-child(2n+1)', el) : $('.Heidelberg-Page:nth-child(2n)', el),
     };
 
-    if(!canClose) {
+    if(!options.canClose) {
       var coverEl = $('<div />').addClass('Heidelberg-HiddenCover');
       el.prepend(coverEl.clone());
       el.append(coverEl.clone());
@@ -67,8 +62,8 @@
       els.page.eq(0).addClass('is-active');
     }
 
-    els.previousTrigger = els.pagesLeft.add(this.options.previousButton);
-    els.nextTrigger     = els.pagesRight.add(this.options.nextButton);
+    els.previousTrigger = els.pagesLeft.add(options.previousButton);
+    els.nextTrigger     = els.pagesRight.add(options.nextButton);
 
     els.previousTrigger.on('click', function() {
       this.turnPage('back');
@@ -89,6 +84,19 @@
 
       Hammer(els.pagesRight, opts).on("dragleft", function(evt) {
         this.turnPage('forwards');
+      }.bind(this));
+    }
+
+    if(options.arrowKeys) {
+      $(document).keydown(function(e){
+        if (e.keyCode == 37) {
+          this.turnPage('forwards');
+          return false;
+        }
+        if (e.keyCode == 39) {
+          this.turnPage('back');
+          return false;
+        }
       }.bind(this));
     }
   };

@@ -1,10 +1,11 @@
 new Heidelberg($('#Heidelberg-example-1'), {
   previousButton: $('#previous'),
-  nextButton: $('#next'),
+  nextButton: $('#next')
 });
 
 new Heidelberg($('#Heidelberg-example-2'), {
-  canClose: true
+  canClose: true,
+  arrowKeys: false
 });
 
 $(window).load(function() {
