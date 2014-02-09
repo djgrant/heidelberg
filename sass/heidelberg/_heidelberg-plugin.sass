@@ -75,6 +75,7 @@ $_right: odd
 .Heidelberg-Page.was-active
   z-index: 1
 
+// Stacking order of concurrent animating pages
 .Heidelberg-Page.is-animating:nth-child(#{$_right})
   z-index: 4
 
@@ -85,9 +86,19 @@ $_right: odd
   z-index: 1
 
 
+// If JS fails show first spread
+.Heidelberg-Book > .Heidelberg-Spread
+  display: none
+
+.Heidelberg-Book > .Heidelberg-Spread:first-child
+  display: block
+  width: 100%
+  overflow: hidden
+
 // Spreads to pages
 .Heidelberg-Spread
   width: 200%
+  height: 100%
 
 .Heidelberg-Page.with-Spread:nth-child(#{$_right}) .Heidelberg-Spread
   left: -100%
