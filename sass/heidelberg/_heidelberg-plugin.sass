@@ -1,9 +1,18 @@
 $_left: even
 $_right: odd
 
-.Heidelberg-Book
-  perspective: $Heidelberg-perspective
+@mixin Heidelberg($perspective, $duration: 1s, $timing: ease)
+  &
+    perspective: $perspective
 
+  & .Heidelberg-Page
+    transition: transform $duration $timing
+
+// Instantiate default Heidelberg
+.Heidelberg-Book
+  +Heidelberg($Heidelberg-perspective, $Heidelberg-duration, $Heidelberg-timing)
+
+.Heidelberg-Book
   &:after
     content: ''
     display: table
@@ -17,7 +26,6 @@ $_right: odd
   overflow: hidden
   backface-visibility: hidden
   transform-style: preserve-3d
-  transition: transform $Heidelberg-duration $Heidelberg-timing
 
   // left pages before active spread
   // active left page
