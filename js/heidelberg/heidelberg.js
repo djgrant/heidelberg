@@ -102,7 +102,7 @@
 
     if((els.page.last().hasClass('is-active') && direction == 'forwards') ||
        (els.page.first().hasClass('is-active') && direction == 'back') ||
-        $('.Heidelberg-Page.is-animating', el).length > 4)
+        $('.Heidelberg-Page.is-animating', el).length > 3)
     {
       return
     }

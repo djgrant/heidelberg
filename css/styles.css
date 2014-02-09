@@ -76,12 +76,17 @@
   z-index: 3;
 }
 
-/* line 71, ../sass/heidelberg/_heidelberg-plugin.sass */
+/* line 70, ../sass/heidelberg/_heidelberg-plugin.sass */
+.Heidelberg-Page.is-animating + .Heidelberg-Page:not(.is-animating):nth-child(odd) {
+  z-index: 1;
+}
+
+/* line 75, ../sass/heidelberg/_heidelberg-plugin.sass */
 .Heidelberg-Spread {
   width: 200%;
 }
 
-/* line 74, ../sass/heidelberg/_heidelberg-plugin.sass */
+/* line 78, ../sass/heidelberg/_heidelberg-plugin.sass */
 .Heidelberg-Page.with-Spread:nth-child(odd) .Heidelberg-Spread {
   left: -100%;
 }
