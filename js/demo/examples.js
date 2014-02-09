@@ -5,5 +5,6 @@ new Heidelberg($('#Heidelberg-example-1'), {
 
 new Heidelberg($('#Heidelberg-example-2'), {
   canClose: true,
-  arrowKeys: false
+  arrowKeys: false,
+  concurrentAnimations: 5
 });

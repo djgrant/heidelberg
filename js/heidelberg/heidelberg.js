@@ -23,10 +23,13 @@
       previousButton: $(),
       hasSpreads: false,
       canClose: false,
-      arrowKeys: true
+      arrowKeys: true,
+      concurrentAnimations: null
     };
 
     this.options = $.extend({}, defaults, options);
+
+    !this.options.concurrentAnimations || this.options.concurrentAnimations++;
 
     // PRIVATE VARIABLES
     // Main element always a jQuery object
@@ -109,12 +112,13 @@
 
     var el = this.el;
     var els = {};
+    var options = this.options;
 
     els.page = $('.Heidelberg-Page', el);
 
     if((els.page.last().hasClass('is-active') && direction == 'forwards') ||
        (els.page.first().hasClass('is-active') && direction == 'back') ||
-        $('.Heidelberg-Page.is-animating', el).length > 3)
+        (options.concurrentAnimations && $('.Heidelberg-Page.is-animating', el).length > options.concurrentAnimations))
     {
       return
     }
