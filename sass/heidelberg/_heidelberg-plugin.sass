@@ -2,7 +2,7 @@ $left: even
 $right: odd
 
 .Heidelberg-Book
-  perspective: 1600
+  perspective: $Heidelberg-perspective
 
   &:after
     content: ''
@@ -15,11 +15,8 @@ $right: odd
   height: 100%
   background: black
   overflow: hidden
-
-  img
-    width: 100%
-
   backface-visibility: hidden
+  transform-style: preserve-3d
   transition: transform $Heidelberg-duration $Heidelberg-timing
 
   // left pages before active spread

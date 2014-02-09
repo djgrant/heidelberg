@@ -1,6 +1,6 @@
 /* line 4, ../sass/heidelberg/_heidelberg-plugin.sass */
 .Heidelberg-Book {
-  perspective: 1600;
+  perspective: 2200px;
 }
 /* line 7, ../sass/heidelberg/_heidelberg-plugin.sass */
 .Heidelberg-Book:after {
@@ -17,83 +17,80 @@
   background: black;
   overflow: hidden;
   backface-visibility: hidden;
+  transform-style: preserve-3d;
   transition: transform 0.9s ease;
   transform: rotateY(0);
 }
-/* line 19, ../sass/heidelberg/_heidelberg-plugin.sass */
-.Heidelberg-Page img {
-  width: 100%;
-}
 
-/* line 29, ../sass/heidelberg/_heidelberg-plugin.sass */
+/* line 26, ../sass/heidelberg/_heidelberg-plugin.sass */
 .Heidelberg-Page:nth-child(2) {
   float: left;
   position: relative;
 }
 
-/* line 34, ../sass/heidelberg/_heidelberg-plugin.sass */
+/* line 31, ../sass/heidelberg/_heidelberg-plugin.sass */
 .Heidelberg-Page:nth-child(even) {
   transform-origin: 100%;
   left: 0;
 }
 
-/* line 39, ../sass/heidelberg/_heidelberg-plugin.sass */
+/* line 36, ../sass/heidelberg/_heidelberg-plugin.sass */
 .Heidelberg-Page:nth-child(odd) {
   transform-origin: 0;
   right: 0;
   transform: rotateY(-180deg);
 }
 
-/* line 47, ../sass/heidelberg/_heidelberg-plugin.sass */
+/* line 44, ../sass/heidelberg/_heidelberg-plugin.sass */
 .Heidelberg-Page.is-active {
   z-index: 2;
 }
 
-/* line 52, ../sass/heidelberg/_heidelberg-plugin.sass */
+/* line 49, ../sass/heidelberg/_heidelberg-plugin.sass */
 .Heidelberg-Page.is-active:nth-child(odd) {
   transform: rotateY(0);
 }
 
-/* line 56, ../sass/heidelberg/_heidelberg-plugin.sass */
+/* line 53, ../sass/heidelberg/_heidelberg-plugin.sass */
 .Heidelberg-Page.is-active:nth-child(odd) ~ .Heidelberg-Page:nth-child(even) {
   transform: rotateY(180deg);
 }
 
-/* line 60, ../sass/heidelberg/_heidelberg-plugin.sass */
+/* line 57, ../sass/heidelberg/_heidelberg-plugin.sass */
 .Heidelberg-Page.is-active:nth-child(odd) ~ .Heidelberg-Page:nth-child(odd) {
   transform: rotateY(0);
 }
 
-/* line 64, ../sass/heidelberg/_heidelberg-plugin.sass */
+/* line 61, ../sass/heidelberg/_heidelberg-plugin.sass */
 .Heidelberg-Page.was-active {
   z-index: 1;
 }
 
-/* line 67, ../sass/heidelberg/_heidelberg-plugin.sass */
+/* line 64, ../sass/heidelberg/_heidelberg-plugin.sass */
 .Heidelberg-Page.is-animating:nth-child(odd) {
   z-index: 4;
 }
 
-/* line 70, ../sass/heidelberg/_heidelberg-plugin.sass */
+/* line 67, ../sass/heidelberg/_heidelberg-plugin.sass */
 .Heidelberg-Page.is-animating:nth-child(odd) ~ .Heidelberg-Page.is-animating {
   z-index: 3;
 }
 
-/* line 74, ../sass/heidelberg/_heidelberg-plugin.sass */
+/* line 71, ../sass/heidelberg/_heidelberg-plugin.sass */
 .Heidelberg-Spread {
   width: 200%;
 }
 
-/* line 77, ../sass/heidelberg/_heidelberg-plugin.sass */
+/* line 74, ../sass/heidelberg/_heidelberg-plugin.sass */
 .Heidelberg-Page.with-Spread:nth-child(odd) .Heidelberg-Spread {
   left: -100%;
 }
 
 /* line 1, ../sass/heidelberg/_heidelberg-skin.sass */
 .Heidelberg-Book {
-  width: 800px;
+  width: 574px;
   max-width: 100%;
-  height: 300px;
+  height: 215px;
   margin: 0 auto 15px;
   background: #333333;
 }
@@ -109,6 +106,11 @@
   line-height: 22px;
   font-size: 22px;
   color: #777777;
+}
+
+/* line 20, ../sass/heidelberg/_heidelberg-skin.sass */
+.Heidelberg-Page img {
+  width: 100%;
 }
 
 /**
