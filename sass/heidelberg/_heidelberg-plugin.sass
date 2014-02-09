@@ -12,6 +12,11 @@ $_right: odd
 .Heidelberg-Book
   +Heidelberg($Heidelberg-perspective, $Heidelberg-duration, $Heidelberg-timing)
 
+
+// Disable transitions plugin has not initialised
+.Heidelberg-Book:not(.ready) *
+  transition: none !important
+
 .Heidelberg-Book
   &:after
     content: ''

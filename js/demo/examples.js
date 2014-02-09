@@ -7,7 +7,3 @@ new Heidelberg($('#Heidelberg-example-2'), {
   canClose: true,
   arrowKeys: false
 });
-
-$(window).load(function() {
-  $('html').removeClass('preload');
-});

@@ -42,6 +42,10 @@
     var el       = this.el;
     var options  = this.options;
 
+    $(window).load(function() {
+      el.addClass('ready');
+    });
+
     if(options.hasSpreads || el.hasClass('with-Spreads')) {
       this.setupSpreads();
     }
