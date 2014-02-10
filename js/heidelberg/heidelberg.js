@@ -25,7 +25,8 @@
       canClose: false,
       arrowKeys: true,
       concurrentAnimations: null,
-      onPageTurn: function() {}
+      onPageTurn: function() {},
+      onSpreadSetup: function() {}
     };
 
     this.options = $.extend({}, defaults, options);
@@ -163,8 +164,8 @@
 
   Heidelberg.prototype.setupSpreads = function() {
 
-    var el  = this.el;
-    var els = {};
+    var el      = this.el;
+    var options = this.options;
 
     $('.Heidelberg-Spread', el).each(function() {
       var spreadEl = $(this);
@@ -172,6 +173,8 @@
       spreadEl.after(pageEl);
       spreadEl.replaceWith(pageEl.clone());
     });
+
+    options.onSpreadSetup(el);
   }
 
   // expose Heidelberg
