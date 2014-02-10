@@ -145,7 +145,7 @@
 
     els.isAnimating.addClass('is-animating');
     els.isAnimating.on('webkittransitionEnd otransitionend mstransitionEnd transitionend', function () {
-        els.isAnimating.removeClass('is-animating');
+      els.isAnimating.removeClass('is-animating');
     }.bind(document));
 
   };
