@@ -117,11 +117,12 @@
 
 /* line 106, ../sass/heidelberg/_heidelberg-plugin.sass */
 .Heidelberg-Spread {
+  position: relative;
   width: 200%;
   height: 100%;
 }
 
-/* line 110, ../sass/heidelberg/_heidelberg-plugin.sass */
+/* line 111, ../sass/heidelberg/_heidelberg-plugin.sass */
 .Heidelberg-Page.with-Spread:nth-child(odd) .Heidelberg-Spread {
   left: -100%;
 }
