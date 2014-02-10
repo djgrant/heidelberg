@@ -24,7 +24,8 @@
       hasSpreads: false,
       canClose: false,
       arrowKeys: true,
-      concurrentAnimations: null
+      concurrentAnimations: null,
+      onPageTurn: function() {}
     };
 
     this.options = $.extend({}, defaults, options);
@@ -155,6 +156,8 @@
     els.isAnimating.on('webkittransitionEnd otransitionend mstransitionEnd transitionend', function () {
       els.isAnimating.removeClass('is-animating');
     }.bind(document));
+
+    options.onPageTurn(el, els);
 
   };
 
