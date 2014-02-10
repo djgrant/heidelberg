@@ -105,11 +105,11 @@
 
     if(options.arrowKeys) {
       $(document).keydown(function(e){
-        if (e.keyCode == 37) {
+        if (e.keyCode == forwardsKeycode) {
           this.turnPage('forwards');
           return false;
         }
-        if (e.keyCode == 39) {
+        if (e.keyCode == backKeycode) {
           this.turnPage('back');
           return false;
         }

@@ -2,7 +2,6 @@ new Heidelberg($('#Heidelberg-example-1'), {
   previousButton: $('#previous'),
   nextButton: $('#next'),
   onPageTurn: function(el, els) {
-    debugger;
   }
 });
 
