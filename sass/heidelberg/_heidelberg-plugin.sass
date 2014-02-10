@@ -95,6 +95,13 @@ $_right: odd
   width: 100%
   overflow: hidden
 
+// Basic functionality for devices that don't support 3d
+.no-csstransforms3d .Heidelberg-Page
+  display: none
+
+.no-csstransforms3d .Heidelberg-Page.is-active
+  display: block
+
 // Spreads to pages
 .Heidelberg-Spread
   width: 200%

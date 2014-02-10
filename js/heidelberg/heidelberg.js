@@ -94,6 +94,14 @@
       }.bind(this));
     }
 
+    var forwardsKeycode = 37;
+    var backKeycode = 39;
+
+    if($('html').hasClass('no-csstransforms3d')) {
+      forwardsKeycode = 39;
+      backKeycode = 37;
+    }
+
     if(options.arrowKeys) {
       $(document).keydown(function(e){
         if (e.keyCode == 37) {
