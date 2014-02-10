@@ -56,7 +56,7 @@
     }
 
     var els = {
-      page:       $('.Heidelberg-Page', el),
+      pages:       $('.Heidelberg-Page', el),
       pagesLeft:  options.canClose ? $('.Heidelberg-Page:nth-child(2n)', el) : $('.Heidelberg-Page:nth-child(2n+1)', el),
       pagesRight: options.canClose ? $('.Heidelberg-Page:nth-child(2n+1)', el) : $('.Heidelberg-Page:nth-child(2n)', el),
     };
@@ -65,10 +65,10 @@
       var coverEl = $('<div />').addClass('Heidelberg-HiddenCover');
       el.prepend(coverEl.clone());
       el.append(coverEl.clone());
-      els.page.eq(0).add(els.page.eq(1)).addClass('is-active');
+      els.pages.eq(0).add(els.pages.eq(1)).addClass('is-active');
     }
     else {
-      els.page.eq(0).addClass('is-active');
+      els.pages.eq(0).addClass('is-active');
     }
 
     els.previousTrigger = els.pagesLeft.add(options.previousButton);
@@ -124,10 +124,10 @@
     var els = {};
     var options = this.options;
 
-    els.page = $('.Heidelberg-Page', el);
+    els.pages = $('.Heidelberg-Page', el);
 
-    if((els.page.last().hasClass('is-active') && direction == 'forwards') ||
-       (els.page.first().hasClass('is-active') && direction == 'back') ||
+    if((els.pages.last().hasClass('is-active') && direction == 'forwards') ||
+       (els.pages.first().hasClass('is-active') && direction == 'back') ||
         (options.concurrentAnimations && $('.Heidelberg-Page.is-animating', el).length > options.concurrentAnimations))
     {
       return
