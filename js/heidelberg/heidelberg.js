@@ -51,7 +51,7 @@
       el.addClass('ready');
     });
 
-    if(options.hasSpreads || el.hasClass('with-Spreads')) {
+    if(options.hasSpreads) {
       this.setupSpreads();
     }
 
