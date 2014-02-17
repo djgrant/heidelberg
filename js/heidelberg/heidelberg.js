@@ -47,16 +47,12 @@
     var el       = this.el;
     var options  = this.options;
 
-    $(window).load(function() {
-      el.addClass('ready');
-    });
-
     if(options.hasSpreads) {
       this.setupSpreads();
     }
 
     var els = {
-      pages:       $('.Heidelberg-Page', el),
+      pages:      $('.Heidelberg-Page', el),
       pagesLeft:  options.canClose ? $('.Heidelberg-Page:nth-child(2n)', el) : $('.Heidelberg-Page:nth-child(2n+1)', el),
       pagesRight: options.canClose ? $('.Heidelberg-Page:nth-child(2n+1)', el) : $('.Heidelberg-Page:nth-child(2n)', el),
     };
