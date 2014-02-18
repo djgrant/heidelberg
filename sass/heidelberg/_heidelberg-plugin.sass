@@ -30,7 +30,7 @@ $_right: odd
 .Heidelberg-Page
   position: absolute
   width: 50%
-  min-height: 100%
+  max-height: 100% // IE 10/11
   background: black
   overflow: hidden
   backface-visibility: hidden
@@ -110,7 +110,6 @@ $_right: odd
 .Heidelberg-Spread
   position: relative
   width: 200%
-  min-height: 100%
 
 .Heidelberg-Page.with-Spread:nth-child(#{$_right}) .Heidelberg-Spread
   left: -100%
