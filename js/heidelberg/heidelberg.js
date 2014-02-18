@@ -93,10 +93,12 @@
       }
       Hammer(els.pagesLeft, opts).on("dragright", function(evt) {
         this.turnPage('back');
+        evt.gesture.stopDetect();
       }.bind(this));
 
       Hammer(els.pagesRight, opts).on("dragleft", function(evt) {
         this.turnPage('forwards');
+        evt.gesture.stopDetect();
       }.bind(this));
     }
 
