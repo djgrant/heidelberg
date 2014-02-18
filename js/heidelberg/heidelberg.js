@@ -103,7 +103,7 @@
     var forwardsKeycode = 37;
     var backKeycode = 39;
 
-    if($('html').hasClass('no-csstransforms3d')) {
+    if((Modernizr && !Modernizr.csstransforms3d)) {
       forwardsKeycode = 39;
       backKeycode = 37;
     }
@@ -157,7 +157,9 @@
 
     els.isAnimating = els.isAnimatingIn.add(els.isAnimatingOut);
 
-    els.isAnimating.addClass('is-animating');
+    if((Modernizr && Modernizr.csstransforms3d)) {
+      els.isAnimating.addClass('is-animating');
+    }
     els.isAnimating.on('webkittransitionEnd otransitionend mstransitionEnd transitionend', function () {
       els.isAnimating.removeClass('is-animating');
     }.bind(document));
