@@ -134,7 +134,8 @@
 
     if((els.pages.last().hasClass('is-active') && direction == 'forwards') ||
        (els.pages.first().hasClass('is-active') && direction == 'back') ||
-        (options.concurrentAnimations && $('.Heidelberg-Page.is-animating', el).length > options.concurrentAnimations))
+        (options.concurrentAnimations && $('.Heidelberg-Page.is-animating', el).length > options.concurrentAnimations) ||
+        ((Modernizr && !Modernizr.preserve3d) && $('.Heidelberg-Page.is-animating', el).length > 2))
     {
       return
     }
