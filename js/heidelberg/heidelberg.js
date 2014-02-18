@@ -47,8 +47,16 @@
     var el       = this.el;
     var options  = this.options;
 
+    var setReady = function() {
+      el.addClass('is-ready');
+    }
+
     if(options.hasSpreads) {
-      this.setupSpreads();
+      this.setupSpreads(function() {
+        setReady();
+      });
+    } else {
+      setReady();
     }
 
     var els = {
@@ -158,7 +166,7 @@
 
   };
 
-  Heidelberg.prototype.setupSpreads = function() {
+  Heidelberg.prototype.setupSpreads = function(callback) {
 
     var el      = this.el;
     var options = this.options;
@@ -171,6 +179,9 @@
     });
 
     options.onSpreadSetup(el);
+    if(typeof callback == 'function') {
+      callback();
+    }
   }
 
   // expose Heidelberg

@@ -12,18 +12,25 @@ $_right: odd
 .Heidelberg-Book
   +Heidelberg($Heidelberg-perspective, $Heidelberg-duration, $Heidelberg-timing)
 
+// Disable transitions if plugin has not initialised
+.Heidelberg-Book:not(.is-ready) *
+  transition: none !important
+
 .Heidelberg-Book
   transform-style: preserve-3d
 
+  &:before,
   &:after
     content: ''
     display: table
+
+  &:after
     clear: both
 
 .Heidelberg-Page
   position: absolute
   width: 50%
-  height: 100%
+  min-height: 100%
   background: black
   overflow: hidden
   backface-visibility: hidden
@@ -96,13 +103,19 @@ $_right: odd
 
 .no-csstransforms3d .Heidelberg-Page.is-active
   display: block
+  position: relative
+  float: left
 
 // Spreads to pages
 .Heidelberg-Spread
   position: relative
   width: 200%
-  height: 100%
+  min-height: 100%
 
 .Heidelberg-Page.with-Spread:nth-child(#{$_right}) .Heidelberg-Spread
   left: -100%
 
+// Older browsers (<IE9 don't have nth-child selectors)
+// Needs to be on own line to work in IE8
+.no-csstransforms3d .Heidelberg-Page.with-Spread.is-active + .Heidelberg-Page.with-Spread.is-active .Heidelberg-Spread
+  left: -100%
