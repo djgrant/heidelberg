@@ -13,6 +13,13 @@
       }
     }
 
+    // Check for Modernizr, if not available assume modern browser
+    if(!Modernizr) {
+      window.Modernizr = {
+        csstransforms3d: true
+      };
+    }
+
     // OPTIONS
     var defaults = {
       nextButton: $(),
@@ -101,7 +108,7 @@
     var forwardsKeycode = 37;
     var backKeycode = 39;
 
-    if((Modernizr && !Modernizr.csstransforms3d)) {
+    if((!Modernizr.csstransforms3d)) {
       forwardsKeycode = 39;
       backKeycode = 37;
     }
@@ -131,7 +138,7 @@
     if((els.pages.last().hasClass('is-active') && direction == 'forwards') ||
        (els.pages.first().hasClass('is-active') && direction == 'back') ||
         (options.concurrentAnimations && $('.Heidelberg-Page.is-animating', el).length > options.concurrentAnimations) ||
-        ((Modernizr && !Modernizr.preserve3d) && $('.Heidelberg-Page.is-animating', el).length > 2))
+        ((!Modernizr.preserve3d) && $('.Heidelberg-Page.is-animating', el).length > 2))
     {
       return
     }
@@ -156,7 +163,7 @@
 
     els.isAnimating = els.isAnimatingIn.add(els.isAnimatingOut);
 
-    if((Modernizr && Modernizr.csstransforms3d)) {
+    if((Modernizr.csstransforms3d)) {
       els.isAnimating.addClass('is-animating');
     }
     els.isAnimating.on('webkittransitionEnd otransitionend mstransitionEnd transitionend', function () {
