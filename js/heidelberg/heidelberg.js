@@ -14,11 +14,7 @@
     }
 
     // Check for Modernizr, if not available assume modern browser
-    if(!Modernizr) {
-      window.Modernizr = {
-        csstransforms3d: true
-      };
-    }
+    window.Modernizr = Modernizr || {csstransforms3d: true};
 
     // OPTIONS
     var defaults = {
