@@ -13,10 +13,6 @@
       }
     }
 
-    if (this === window) {
-      return;
-    }
-
     // OPTIONS
     var defaults = {
       nextButton: $(),
