@@ -54,9 +54,12 @@
       this.setupSpreads();
     }
 
+    var leftFunction  = options.canClose ? 'even' : 'odd';
+    var rightFunction = options.canClose ? 'odd' : 'even';
+
     els.pages      = $('.Heidelberg-Page', this.el);
-    els.pagesLeft  = options.canClose ? $('.Heidelberg-Page:nth-child(2n)', el) : $('.Heidelberg-Page:nth-child(2n+1)', el);
-    els.pagesRight = options.canClose ? $('.Heidelberg-Page:nth-child(2n+1)', el) : $('.Heidelberg-Page:nth-child(2n)', el);
+    els.pagesLeft  = $('.Heidelberg-Page:nth-child('+leftFunction+')', el);
+    els.pagesRight = $('.Heidelberg-Page:nth-child('+rightFunction+')', el);
 
     if(!options.canClose) {
       var coverEl = $('<div />').addClass('Heidelberg-HiddenCover');
