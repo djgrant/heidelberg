@@ -19,9 +19,3 @@ new Heidelberg($('#Heidelberg-example-2'), {
   arrowKeys: false,
   concurrentAnimations: 5
 });
-
-var progressIndicators = function(page, el){
-  var indicators = el.parents('.book-module').find('.book-module-indicator');
-  indicators.removeClass('filled');
-  indicators.slice(0, page).addClass('filled');
-};
