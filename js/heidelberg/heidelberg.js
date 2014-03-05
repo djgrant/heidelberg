@@ -42,7 +42,8 @@
 
   Heidelberg.prototype.init = function() {
 
-    var el = this.el;
+    var el      = this.el;
+    var els     = {};
     var options = this.options;
 
     setTimeout(function() {
@@ -53,11 +54,9 @@
       this.setupSpreads();
     }
 
-    var els = {
-      pages:      $('.Heidelberg-Page', this.el),
-      pagesLeft:  options.canClose ? $('.Heidelberg-Page:nth-child(2n)', el) : $('.Heidelberg-Page:nth-child(2n+1)', this.el),
-      pagesRight: options.canClose ? $('.Heidelberg-Page:nth-child(2n+1)', el) : $('.Heidelberg-Page:nth-child(2n)', this.el),
-    };
+    els.pages      = $('.Heidelberg-Page', this.el);
+    els.pagesLeft  = options.canClose ? $('.Heidelberg-Page:nth-child(2n)', el) : $('.Heidelberg-Page:nth-child(2n+1)', el);
+    els.pagesRight = options.canClose ? $('.Heidelberg-Page:nth-child(2n+1)', el) : $('.Heidelberg-Page:nth-child(2n)', el);
 
     if(!options.canClose) {
       var coverEl = $('<div />').addClass('Heidelberg-HiddenCover');
@@ -120,61 +119,81 @@
 
   Heidelberg.prototype.turnPage = function(arg) {
 
-    var el = this.el;
-    var els = {};
-    var options = this.options;
+    var el        = this.el;
+    var els       = {};
+    var options   = this.options;
+    var index     = {};
+    var direction = arg;
 
-    els.pages = $('.Heidelberg-Page', this.el);
+    els.pages          = $('.Heidelberg-Page', el);
+    els.pagesActive    = $('.Heidelberg-Page.is-active', el);
+    els.pagesAnimating = $('.Heidelberg-Page.is-animating', el);
+    els.children       = $('.Heidelberg-Page, .Heidelberg-HiddenCover', el);
 
-    if((els.pages.last().hasClass('is-active') && arg == 'forwards') ||
-       (els.pages.first().hasClass('is-active') && arg == 'back') ||
-        (options.concurrentAnimations && $('.Heidelberg-Page.is-animating', el).length > options.concurrentAnimations) ||
-        ((!Modernizr.preserve3d) && $('.Heidelberg-Page.is-animating', el).length > 2))
-    {
-      return
+    var maxAnimations = options.concurrentAnimations && els.pagesAnimating.length > options.concurrentAnimations;
+    var maxAnimationsBrowser = !Modernizr.preserve3d && els.pagesAnimating.length > 2;
+
+    if(maxAnimations || maxAnimationsBrowser) {
+      return;
     }
 
-    els.isActive       = $('.Heidelberg-Page.is-active', el);
-    els.isAnimatingOut = (arg == 'back') ? els.isActive.first() : els.isActive.last();
+    index.activeRight = els.pagesActive.eq(1).index();
+    index.activeLeft  = index.activeRight - 1;
 
-    $('.Heidelberg-Page.was-active', el).removeClass('was-active');
+    var isFirstPage = els.pages.first().index() == index.activeLeft && direction == 'back';
+    var isLastPage  = els.pages.last().index() == index.activeRight && direction == 'forwards';
 
-    if (arg == 'back') {
-      els.isAnimatingIn = els.isAnimatingOut.prev();
+    if(isFirstPage || isLastPage) {
+      return;
     }
 
-    if (arg == 'forwards') {
-      els.isAnimatingIn = els.isAnimatingOut.next();
-    }
+    if(typeof arg == 'number') {
+      var isOdd         = arg & 1;
+      var isRight       = options.canClose ? isOdd : !isOdd;
+      index.targetRight = isRight ? arg : arg + 1;
+      index.targetLeft  = index.targetRight - 1;
 
-    if (typeof arg === 'number') {
-      els.isAnimatingIn = els.pages[arg];
-    }
-
-    if(arg == 'forwards' || arg > els.isActive) {
-      els.newActive = els.isAnimatingIn.add(els.isAnimatingIn.next());
+      if (index.targetLeft == index.activeLeft) {
+        return;
+      }
+      else if(index.targetLeft > index.activeRight) {
+        direction           = 'forwards';
+        index.target        = index.targetLeft;
+        index.targetSibling = index.target + 1;
+      }
+      else {
+        direction           = 'back';
+        index.target        = index.targetRight;
+        index.targetSibling = index.target - 1;
+      }
     }
     else {
-      els.newActive = els.isAnimatingIn.add(els.isAnimatingIn.prev());
+      index.target        = direction == 'forwards' ? index.activeRight + 1 : index.activeLeft - 1;
+      index.targetSibling = direction == 'forwards' ? index.activeRight + 2 : index.activeLeft - 2;
     }
 
-    els.isActive.removeClass('is-active').addClass('was-active');
-    els.newActive.addClass('is-active');
+    els.pagesAnimatingOut = (direction == 'back') ? els.pagesActive.first() : els.pagesActive.last();
+    els.pagesAnimatingIn  = els.children.eq(index.target);
+    els.pagesTarget       = els.pagesAnimatingIn.add(els.children.eq(index.targetSibling));
+    els.pagesAnimating    = els.pagesAnimatingIn.add(els.pagesAnimatingOut);
 
-    els.isAnimating = els.isAnimatingIn.add(els.isAnimatingOut);
+    els.pagesActive.removeClass('is-active').addClass('was-active');
+    els.pagesTarget.addClass('is-active');
 
     if((Modernizr.csstransforms3d)) {
-      els.isAnimating.addClass('is-animating');
+      els.pagesAnimating.addClass('is-animating');
     }
-    els.isAnimating.on('webkittransitionEnd otransitionend mstransitionEnd transitionend', function () {
-      els.isAnimating.removeClass('is-animating');
+
+    els.pagesAnimating.on('webkittransitionEnd otransitionend mstransitionEnd transitionend', function () {
+      els.pagesAnimating.removeClass('is-animating');
+      els.pagesActive.removeClass('was-active');
     }.bind(document));
 
     options.onPageTurn(el, els);
 
   };
 
-  Heidelberg.prototype.setupSpreads = function(callback) {
+  Heidelberg.prototype.setupSpreads = function() {
 
     var el      = this.el;
     var options = this.options;
