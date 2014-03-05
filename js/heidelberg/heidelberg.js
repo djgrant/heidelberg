@@ -15,6 +15,7 @@
 
     // Check for Modernizr, if not available assume modern browser
     window.Modernizr = Modernizr || {csstransforms3d: true};
+    Modernizr.preserve3d = Modernizr.preserve3d || true;
 
     // OPTIONS
     var defaults = {
@@ -30,8 +31,6 @@
 
     this.options = $.extend({}, defaults, options);
 
-    !this.options.concurrentAnimations || this.options.concurrentAnimations++;
-
     // PRIVATE VARIABLES
     // Main element always a jQuery object
     this.el = (el instanceof jQuery) ? el : $(el);
@@ -43,25 +42,21 @@
 
   Heidelberg.prototype.init = function() {
 
-    var el       = this.el;
-    var options  = this.options;
+    var el = this.el;
+    var options = this.options;
 
-    var setReady = function() {
+    setTimeout(function() {
       el.addClass('is-ready');
-    }
+    }, 0);
 
     if(options.hasSpreads) {
-      this.setupSpreads(function() {
-        setReady();
-      });
-    } else {
-      setReady();
+      this.setupSpreads();
     }
 
     var els = {
-      pages:      $('.Heidelberg-Page', el),
-      pagesLeft:  options.canClose ? $('.Heidelberg-Page:nth-child(2n)', el) : $('.Heidelberg-Page:nth-child(2n+1)', el),
-      pagesRight: options.canClose ? $('.Heidelberg-Page:nth-child(2n+1)', el) : $('.Heidelberg-Page:nth-child(2n)', el),
+      pages:      $('.Heidelberg-Page', this.el),
+      pagesLeft:  options.canClose ? $('.Heidelberg-Page:nth-child(2n)', el) : $('.Heidelberg-Page:nth-child(2n+1)', this.el),
+      pagesRight: options.canClose ? $('.Heidelberg-Page:nth-child(2n+1)', el) : $('.Heidelberg-Page:nth-child(2n)', this.el),
     };
 
     if(!options.canClose) {
@@ -123,16 +118,16 @@
     }
   };
 
-  Heidelberg.prototype.turnPage = function(direction) {
+  Heidelberg.prototype.turnPage = function(arg) {
 
     var el = this.el;
     var els = {};
     var options = this.options;
 
-    els.pages = $('.Heidelberg-Page', el);
+    els.pages = $('.Heidelberg-Page', this.el);
 
-    if((els.pages.last().hasClass('is-active') && direction == 'forwards') ||
-       (els.pages.first().hasClass('is-active') && direction == 'back') ||
+    if((els.pages.last().hasClass('is-active') && arg == 'forwards') ||
+       (els.pages.first().hasClass('is-active') && arg == 'back') ||
         (options.concurrentAnimations && $('.Heidelberg-Page.is-animating', el).length > options.concurrentAnimations) ||
         ((!Modernizr.preserve3d) && $('.Heidelberg-Page.is-animating', el).length > 2))
     {
@@ -140,18 +135,27 @@
     }
 
     els.isActive       = $('.Heidelberg-Page.is-active', el);
-    els.isAnimatingOut = (direction == 'back') ? els.isActive.first() : els.isActive.last();
+    els.isAnimatingOut = (arg == 'back') ? els.isActive.first() : els.isActive.last();
 
     $('.Heidelberg-Page.was-active', el).removeClass('was-active');
 
-    if (direction == 'back') {
+    if (arg == 'back') {
       els.isAnimatingIn = els.isAnimatingOut.prev();
-      els.newActive     = els.isAnimatingIn.add(els.isAnimatingIn.prev());
     }
 
-    if (direction == 'forwards') {
+    if (arg == 'forwards') {
       els.isAnimatingIn = els.isAnimatingOut.next();
-      els.newActive     = els.isAnimatingIn.add(els.isAnimatingIn.next());
+    }
+
+    if (typeof arg === 'number') {
+      els.isAnimatingIn = els.pages[arg];
+    }
+
+    if(arg == 'forwards' || arg > els.isActive) {
+      els.newActive = els.isAnimatingIn.add(els.isAnimatingIn.next());
+    }
+    else {
+      els.newActive = els.isAnimatingIn.add(els.isAnimatingIn.prev());
     }
 
     els.isActive.removeClass('is-active').addClass('was-active');
@@ -183,9 +187,6 @@
     });
 
     options.onSpreadSetup(el);
-    if(typeof callback == 'function') {
-      callback();
-    }
   }
 
   // expose Heidelberg
