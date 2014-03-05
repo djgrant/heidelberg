@@ -1,6 +1,7 @@
 new Heidelberg($('#Heidelberg-example-1'), {
   previousButton: $('#previous'),
   nextButton: $('#next'),
+  hasSpreads: true,
   onPageTurn: function(el, els) {
     console.log('Page turned');
   },
