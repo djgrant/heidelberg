@@ -14,8 +14,16 @@ $('#jump').on('click', function() {
   book1.turnPage(9);
 });
 
-new Heidelberg($('#Heidelberg-example-2'), {
+var book2 = new Heidelberg($('#Heidelberg-example-2'), {
   canClose: true,
   arrowKeys: false,
   concurrentAnimations: 5
+});
+
+$('#first').on('click', function() {
+  book2.turnPage(1);
+});
+
+$('#last').on('click', function() {
+  book2.turnPage(14);
 });

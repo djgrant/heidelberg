@@ -187,7 +187,7 @@
       els.pagesAnimating.addClass('is-animating');
     }
 
-    els.pagesAnimating.on('webkittransitionEnd otransitionend mstransitionEnd transitionend', function () {
+    els.pagesAnimating.on('webkitTransitionEnd oTransitionEnd msTransitionEnd transitionend', function () {
       els.pagesAnimating.removeClass('is-animating');
       els.pagesActive.removeClass('was-active');
     }.bind(document));
