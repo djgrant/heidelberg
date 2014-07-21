@@ -15,7 +15,9 @@
 
     // Check for Modernizr, if not available assume modern browser
     window.Modernizr = Modernizr || {csstransforms3d: true};
-    Modernizr.preserve3d = Modernizr.preserve3d || true;
+    if (typeof Modernizr.preserve3d !== 'boolean') {
+      Modernizr.preserve3d = true;
+    }
 
     // OPTIONS
     var defaults = {
