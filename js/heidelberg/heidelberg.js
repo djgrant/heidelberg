@@ -1,4 +1,7 @@
+/* global Hammer */
+
 (function() {
+  'use strict';
 
   function Heidelberg(el, options) {
 
@@ -14,8 +17,10 @@
     }
 
     // Check for Modernizr, if not available assume modern browser
-    window.Modernizr = Modernizr || {csstransforms3d: true};
-    Modernizr.preserve3d = Modernizr.preserve3d || true;
+    this._Modernizr = window.Modernizr || {csstransforms3d: true};
+    if (typeof this._Modernizr.preserve3d !== 'boolean') {
+		this._Modernizr.preserve3d = true;
+    }
 
     // OPTIONS
     var defaults = {
@@ -38,7 +43,7 @@
     // RUN
     this.init();
 
-  };
+  }
 
   Heidelberg.prototype.init = function() {
 
@@ -83,10 +88,11 @@
     }.bind(this));
 
     if(typeof Hammer !== 'undefined') {
-      opts = {
+      var opts = {
         drag_min_distance: 5,
         swipe_velocity: 0.3
-      }
+      };
+
       Hammer(els.pagesLeft, opts).on("dragright", function(evt) {
         this.turnPage('back');
         evt.gesture.stopDetect();
@@ -101,7 +107,7 @@
     var forwardsKeycode = 37;
     var backKeycode = 39;
 
-    if((!Modernizr.csstransforms3d)) {
+    if((!this._Modernizr.csstransforms3d)) {
       forwardsKeycode = 39;
       backKeycode = 37;
     }
@@ -134,7 +140,7 @@
     els.children       = $('.Heidelberg-Page, .Heidelberg-HiddenCover', el);
 
     var maxAnimations = options.concurrentAnimations && els.pagesAnimating.length > options.concurrentAnimations;
-    var maxAnimationsBrowser = !Modernizr.preserve3d && els.pagesAnimating.length > 2;
+    var maxAnimationsBrowser = !this._Modernizr.preserve3d && els.pagesAnimating.length > 2;
 
     if(maxAnimations || maxAnimationsBrowser) {
       return;
@@ -183,7 +189,7 @@
     els.pagesActive.removeClass('is-active').addClass('was-active');
     els.pagesTarget.addClass('is-active');
 
-    if((Modernizr.csstransforms3d)) {
+    if((this._Modernizr.csstransforms3d)) {
       els.pagesAnimating.addClass('is-animating');
     }
 
@@ -209,7 +215,7 @@
     });
 
     options.onSpreadSetup(el);
-  }
+  };
 
   // expose Heidelberg
   window.Heidelberg = Heidelberg;

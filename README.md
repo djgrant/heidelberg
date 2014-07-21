@@ -4,7 +4,7 @@ Heidelberg
 Industrially pressed CSS3 animated books.
 
 
-### Dependancies
+### Dependencies
 
 * jQuery
 
