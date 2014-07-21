@@ -1,4 +1,7 @@
+/* global Hammer */
+
 (function() {
+  'use strict';
 
   function Heidelberg(el, options) {
 
@@ -85,10 +88,11 @@
     }.bind(this));
 
     if(typeof Hammer !== 'undefined') {
-      opts = {
+      var opts = {
         drag_min_distance: 5,
         swipe_velocity: 0.3
-      }
+      };
+
       Hammer(els.pagesLeft, opts).on("dragright", function(evt) {
         this.turnPage('back');
         evt.gesture.stopDetect();
