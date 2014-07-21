@@ -40,7 +40,7 @@
     // RUN
     this.init();
 
-  };
+  }
 
   Heidelberg.prototype.init = function() {
 
@@ -211,7 +211,7 @@
     });
 
     options.onSpreadSetup(el);
-  }
+  };
 
   // expose Heidelberg
   window.Heidelberg = Heidelberg;
