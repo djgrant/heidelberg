@@ -18,8 +18,8 @@
 
     // Check for Modernizr, if not available assume modern browser
     this._Modernizr = window.Modernizr || {csstransforms3d: true};
-    if (typeof this._Modernizr.preserve3d !== 'boolean') {
-		this._Modernizr.preserve3d = true;
+    if (typeof this._Modernizr.hasOwnProperty('preserve3d')) {
+      this._Modernizr.preserve3d = true;
     }
 
     // OPTIONS
