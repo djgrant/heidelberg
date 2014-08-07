@@ -17,13 +17,15 @@
   transform-style: preserve-3d;
 }
 /* line 22, ../sass/heidelberg/_heidelberg-plugin.sass */
-.Heidelberg-Book:before, .Heidelberg-Book:after {
+.Heidelberg-Book:after {
   content: "";
   display: table;
-}
-/* line 27, ../sass/heidelberg/_heidelberg-plugin.sass */
-.Heidelberg-Book:after {
   clear: both;
+}
+
+/* line 27, ../sass/heidelberg/_heidelberg-plugin.sass */
+.Heidelberg-Book img {
+  vertical-align: middle;
 }
 
 /* line 30, ../sass/heidelberg/_heidelberg-plugin.sass */
@@ -139,14 +141,11 @@
 
 /* line 1, ../sass/heidelberg/_heidelberg-skin.sass */
 .Heidelberg-Book {
-  width: 574px;
   max-width: 100%;
-  height: 215px;
-  margin: 0 auto 15px;
   background: #333333;
 }
 
-/* line 9, ../sass/heidelberg/_heidelberg-skin.sass */
+/* line 6, ../sass/heidelberg/_heidelberg-skin.sass */
 .Heidelberg-Book:not(.with-Spreads):before {
   content: "Click the cover to open";
   position: absolute;
@@ -159,7 +158,7 @@
   color: #777777;
 }
 
-/* line 20, ../sass/heidelberg/_heidelberg-skin.sass */
+/* line 17, ../sass/heidelberg/_heidelberg-skin.sass */
 .Heidelberg-Book img {
   width: 100%;
 }
@@ -178,7 +177,7 @@
  * Loosely based on Monokai textmate theme by http://www.monokai.nl/
  * @author ocodia
  */
-/* line 8, ../sass/demo/_prism.scss */
+/* line 7, ../sass/demo/_prism.scss */
 code[class*="language-"],
 pre[class*="language-"] {
   color: #f8f8f2;
@@ -206,7 +205,7 @@ pre[class*="language-"] {
   overflow: auto;
 }
 
-/* line 36, ../sass/demo/_prism.scss */
+/* line 35, ../sass/demo/_prism.scss */
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
   background: #222;
@@ -218,7 +217,7 @@ pre[class*="language-"] {
   padding: .1em;
 }
 
-/* line 48, ../sass/demo/_prism.scss */
+/* line 45, ../sass/demo/_prism.scss */
 .token.comment,
 .token.prolog,
 .token.doctype,
@@ -236,7 +235,7 @@ pre[class*="language-"] {
   opacity: .7;
 }
 
-/* line 63, ../sass/demo/_prism.scss */
+/* line 60, ../sass/demo/_prism.scss */
 .token.property,
 .token.tag,
 .token.constant,
@@ -244,13 +243,13 @@ pre[class*="language-"] {
   color: #f92672;
 }
 
-/* line 68, ../sass/demo/_prism.scss */
+/* line 67, ../sass/demo/_prism.scss */
 .token.boolean,
 .token.number {
   color: #ae81ff;
 }
 
-/* line 75, ../sass/demo/_prism.scss */
+/* line 72, ../sass/demo/_prism.scss */
 .token.selector,
 .token.attr-name,
 .token.string,
@@ -258,7 +257,7 @@ pre[class*="language-"] {
   color: #a6e22e;
 }
 
-/* line 85, ../sass/demo/_prism.scss */
+/* line 80, ../sass/demo/_prism.scss */
 .token.operator,
 .token.entity,
 .token.url,
@@ -268,7 +267,7 @@ pre[class*="language-"] {
   color: #f8f8f2;
 }
 
-/* line 91, ../sass/demo/_prism.scss */
+/* line 89, ../sass/demo/_prism.scss */
 .token.atrule,
 .token.attr-value {
   color: #e6db74;
@@ -279,7 +278,7 @@ pre[class*="language-"] {
   color: #66d9ef;
 }
 
-/* line 101, ../sass/demo/_prism.scss */
+/* line 100, ../sass/demo/_prism.scss */
 .token.regex,
 .token.important {
   color: #fd971f;
@@ -309,6 +308,6 @@ body {
 
 /* line 9, ../sass/demo/_demo.sass */
 body {
-  padding: 25px;
+  margin: 0;
   background: #2f2f2f;
 }
