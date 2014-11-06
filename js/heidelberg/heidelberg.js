@@ -199,6 +199,7 @@
     }.bind(document));
 
     options.onPageTurn(el, els);
+    $(this).trigger('pageTurn.heidelberg', [el, els]);
 
   };
 
@@ -215,6 +216,7 @@
     });
 
     options.onSpreadSetup(el);
+    $(this).trigger('spreadSetup.heidelberg', el);
   };
 
   // expose Heidelberg
