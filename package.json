@@ -1,0 +1,21 @@
+{
+  "name": "heidelberg",
+  "version": "1.0.0",
+  "description": "A Sass powered animated book plugin",
+  "main": "js/heidelberg/heidelberg.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:djgrant/heidelberg.git"
+  },
+  "keywords": [
+    "book"
+  ],
+  "author": "Daniel Grant",
+  "bugs": {
+    "url": "https://github.com/djgrant/heidelberg/issues"
+  },
+  "homepage": "https://github.com/djgrant/heidelberg"
+}

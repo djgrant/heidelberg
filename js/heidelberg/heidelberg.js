@@ -218,6 +218,10 @@
   };
 
   // expose Heidelberg
-  window.Heidelberg = Heidelberg;
+  if (typeof module === "object" && module.exports) {
+    module.exports = Heidelberg;
+  } else {
+    window.Heidelberg = Heidelberg;
+  }
 
 })();
