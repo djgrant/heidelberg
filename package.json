@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/djgrant/heidelberg/issues"
   },
-  "homepage": "https://github.com/djgrant/heidelberg"
+  "homepage": "https://github.com/djgrant/heidelberg",
+  "dependencies": {
+    "browsernizr": "^1.0.2",
+    "jquery": "^2.1.3"
+  }
 }
