@@ -1,5 +1,8 @@
 # Created by http://www.gitignore.io
 
+### Node ###
+node_modules
+
 ### SASS ###
 ### Sass Ignores - "Sassy CSS" http://sass-lang.com/
 *.sass-cache
