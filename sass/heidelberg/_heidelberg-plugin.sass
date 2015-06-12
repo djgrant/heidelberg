@@ -59,9 +59,13 @@ $_right: odd
   z-index: 2
 
 
+// active left page
+.Heidelberg-Page.is-active:nth-child(#{$_left})
+  transform: rotateY(5deg)
+
 // active right page
 .Heidelberg-Page.is-active:nth-child(#{$_right})
-  transform: rotateY(0)
+  transform: rotateY(-5deg)
 
   // left pages after active spread
 .Heidelberg-Page.is-active:nth-child(#{$_right}) ~ .Heidelberg-Page:nth-child(#{$_left})
