@@ -40,6 +40,7 @@
       canClose: false,
       arrowKeys: true,
       concurrentAnimations: null,
+      limitPageTurns: true,
       onPageTurn: function() {},
       onSpreadSetup: function() {}
     };
@@ -150,7 +151,7 @@
     els.children       = $('.Heidelberg-Page, .Heidelberg-HiddenCover', el);
 
     var maxAnimations = options.concurrentAnimations && els.pagesAnimating.length > options.concurrentAnimations;
-    var maxAnimationsBrowser = !Modernizr.preserve3d && els.pagesAnimating.length > 2;
+    var maxAnimationsBrowser = !Modernizr.preserve3d && els.pagesAnimating.length > 2 && options.limitPageTurns;
 
     if(maxAnimations || maxAnimationsBrowser) {
       return;
