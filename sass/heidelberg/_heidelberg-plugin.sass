@@ -102,3 +102,23 @@ $_right: odd
 // Needs to be on own line to work in IE8
 .no-csstransforms3d .Heidelberg-Page.with-Spread.is-active + .Heidelberg-Page.with-Spread.is-active .Heidelberg-Spread
   left: -100%
+
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active)
+  // active spread
+  .Heidelberg-Page.is-active
+    z-index: 2
+
+  // page transistioning out
+  .Heidelberg-Page.was-active
+    z-index: 1
+
+  // Stacking order of concurrent animating pages
+  .Heidelberg-Page.is-animating:nth-child(#{$_right})
+    z-index: 4
+
+  .Heidelberg-Page.is-animating:nth-child(#{$_right}) ~ .Heidelberg-Page.is-animating
+    z-index: 3
+
+  .Heidelberg-Page.is-animating + .Heidelberg-Page:not(.is-animating):nth-child(#{$_right})
+    z-index: 1
