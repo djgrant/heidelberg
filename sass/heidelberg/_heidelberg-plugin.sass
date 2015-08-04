@@ -54,40 +54,22 @@ $_right: odd
   // right pages before active spread
   transform: rotateY(-180deg)
 
-// active spread
-.Heidelberg-Page.is-active
-  z-index: 2
-
-
 // active left page
 .Heidelberg-Page.is-active:nth-child(#{$_left})
-  transform: rotateY(5deg)
+  transform: rotateY(5deg) translateZ(3px)
 
 // active right page
 .Heidelberg-Page.is-active:nth-child(#{$_right})
-  transform: rotateY(-5deg)
+  transform: rotateY(-5deg) translateZ(3px)
 
   // left pages after active spread
 .Heidelberg-Page.is-active:nth-child(#{$_right}) ~ .Heidelberg-Page:nth-child(#{$_left})
-  transform: rotateY(180deg)
+  transform: rotateY(180deg)  translateZ(3px)
 
 // right pages after active spread
 .Heidelberg-Page.is-active:nth-child(#{$_right}) ~ .Heidelberg-Page:nth-child(#{$_right})
-  transform: rotateY(0)
+  transform: rotateY(0) translateZ(3px)
 
-// page transistioning out
-.Heidelberg-Page.was-active
-  z-index: 1
-
-// Stacking order of concurrent animating pages
-.Heidelberg-Page.is-animating:nth-child(#{$_right})
-  z-index: 4
-
-.Heidelberg-Page.is-animating:nth-child(#{$_right}) ~ .Heidelberg-Page.is-animating
-  z-index: 3
-
-.Heidelberg-Page.is-animating + .Heidelberg-Page:not(.is-animating):nth-child(#{$_right})
-  z-index: 1
 
 
 // If JS fails show first spread
