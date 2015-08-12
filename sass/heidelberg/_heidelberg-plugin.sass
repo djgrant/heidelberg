@@ -120,3 +120,18 @@ $_right: odd
 // Needs to be on own line to work in IE8
 .no-csstransforms3d .Heidelberg-Page.with-Spread.is-active + .Heidelberg-Page.with-Spread.is-active .Heidelberg-Spread
   left: -100%
+
+// Internet 10 only selector - checks Heidelberg HTMLElement attribute: data-useragent
+.Heidelberg-Book[data-useragent*='MSIE 10.0']
+
+  .Heidelberg-Page
+    opacity: 0
+
+  .Heidelberg-Page.is-active
+    transition: transform $Heidelberg-duration ease, opacity $Heidelberg-duration ease
+    opacity: 1
+
+  .Heidelberg-Page.was-active
+    transition-delay: 2s
+    transition: transform $Heidelberg-duration ease, opacity $Heidelberg-duration ease
+    opacity: 0
