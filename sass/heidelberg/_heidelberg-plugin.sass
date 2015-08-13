@@ -45,14 +45,25 @@ $_right: odd
 .Heidelberg-Page:nth-child(#{$_left})
   transform-origin: 100%
   left: 0
+  &:hover
+    cursor: w-resize
+
 
 // right pages
 .Heidelberg-Page:nth-child(#{$_right})
   transform-origin: 0
   right: 0
+  &:hover // roll
+    cursor: e-resize
 
   // right pages before active spread
   transform: rotateY(-180deg)
+
+// disable roll over queue for last spread
+.Heidelberg-Page:nth-last-child(2)
+  opacity: 0
+  &:hover
+    cursor: auto
 
 // active spread
 .Heidelberg-Page.is-active
@@ -62,10 +73,13 @@ $_right: odd
 // active left page
 .Heidelberg-Page.is-active:nth-child(#{$_left})
   transform: rotateY(10deg)
-
+  &:hover
+    transform: rotateY(15deg)
 // active right page
 .Heidelberg-Page.is-active:nth-child(#{$_right})
   transform: rotateY(-10deg)
+  &:hover
+    transform: rotateY(15deg)
 
   // left pages after active spread
 .Heidelberg-Page.is-active:nth-child(#{$_right}) ~ .Heidelberg-Page:nth-child(#{$_left})
