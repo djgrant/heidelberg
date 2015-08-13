@@ -59,9 +59,12 @@ $_right: odd
   // right pages before active spread
   transform: rotateY(-180deg)
 
+.Heidelberg-Page:nth-child(2)
+  &:hover
+    cursor: auto
+
 // disable roll over queue for last spread
 .Heidelberg-Page:nth-last-child(2)
-  opacity: 0
   &:hover
     cursor: auto
 
