@@ -45,14 +45,28 @@ $_right: odd
 .Heidelberg-Page:nth-child(#{$_left})
   transform-origin: 100%
   left: 0
+  //&:hover
+    cursor: w-resize
+
 
 // right pages
 .Heidelberg-Page:nth-child(#{$_right})
   transform-origin: 0
   right: 0
+  //&:hover // roll
+    cursor: e-resize
 
   // right pages before active spread
   transform: rotateY(-180deg)
+
+//.Heidelberg-Page:nth-child(2)
+  &:hover
+    cursor: auto
+
+// disable roll over queue for last spread
+//.Heidelberg-Page:nth-last-child(2)
+  &:hover
+    cursor: auto
 
 // active spread
 .Heidelberg-Page.is-active
@@ -61,11 +75,14 @@ $_right: odd
 
 // active left page
 .Heidelberg-Page.is-active:nth-child(#{$_left})
-  transform: rotateY(5deg)
-
+  transform: rotateY(10deg)
+  &:hover
+    transform: rotateY(15deg)
 // active right page
 .Heidelberg-Page.is-active:nth-child(#{$_right})
-  transform: rotateY(-5deg)
+  transform: rotateY(-10deg)
+  &:hover
+    transform: rotateY(-15deg)
 
   // left pages after active spread
 .Heidelberg-Page.is-active:nth-child(#{$_right}) ~ .Heidelberg-Page:nth-child(#{$_left})
@@ -120,3 +137,18 @@ $_right: odd
 // Needs to be on own line to work in IE8
 .no-csstransforms3d .Heidelberg-Page.with-Spread.is-active + .Heidelberg-Page.with-Spread.is-active .Heidelberg-Spread
   left: -100%
+
+// Internet 10 only selector - checks Heidelberg HTMLElement attribute: data-useragent
+.Heidelberg-Book[data-useragent*='MSIE 10.0']
+
+  .Heidelberg-Page
+    opacity: 0
+
+  .Heidelberg-Page.is-active
+    transition: transform $Heidelberg-duration ease, opacity $Heidelberg-duration ease
+    opacity: 1
+
+  .Heidelberg-Page.was-active
+    transition-delay: 2s
+    transition: transform $Heidelberg-duration ease, opacity $Heidelberg-duration ease
+    opacity: 0
