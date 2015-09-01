@@ -1,0 +1,30 @@
+{
+  "name": "heidelberg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/heidelberg.js",
+  "dependencies": {
+    "gsap": "^1.17.0",
+    "jquery": "^2.1.4"
+  },
+  "devDependencies": {
+    "babelify": "^6.3.0",
+    "browserify": "^11.0.1",
+    "mocha": "^2.3.0",
+    "should": "^7.1.0"
+  },
+  "scripts": {
+    "start": "npm run compile:js",
+    "compile:js": "browserify -t babelify src/scripts/main.js > build/main.js --debug"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djgrant/heidelberg.git"
+  },
+  "author": "Daniel Grant",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/djgrant/heidelberg/issues"
+  },
+  "homepage": "https://github.com/djgrant/heidelberg#readme"
+}
