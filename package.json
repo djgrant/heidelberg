@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/djgrant/heidelberg",
   "dependencies": {
-    "browsernizr": "^1.0.2",
+    "browsernizr": "1.0.2",
     "jquery": "^1.11.2"
   }
 }
