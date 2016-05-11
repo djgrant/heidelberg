@@ -1,0 +1,13 @@
+{
+  "presets": ["es2015-no-commonjs", "react"],
+  "env": {
+    "development": {
+      "presets": ["react-hmre"]
+    },
+    "commonjs": {
+      "plugins": [
+        ["transform-es2015-modules-commonjs", { "loose": true }],
+      ]
+    }
+  }
+}
