@@ -35,7 +35,7 @@ $_right: odd
 
   // left pages before active spread
   // active left page
-  transform: rotateY(0)
+  transform: rotateY(0deg)
 
 .Heidelberg-Page:nth-child(2)
   float: left
@@ -54,18 +54,13 @@ $_right: odd
   // right pages before active spread
   transform: rotateY(-180deg)
 
-// active spread
-.Heidelberg-Page.is-active
-  z-index: 2
-
-
 // active left page
 .Heidelberg-Page.is-active:nth-child(#{$_left})
-  transform: rotateY(5deg)
+  transform: rotateY(10deg)
 
 // active right page
 .Heidelberg-Page.is-active:nth-child(#{$_right})
-  transform: rotateY(-5deg)
+  transform: rotateY(-10deg)
 
   // left pages after active spread
 .Heidelberg-Page.is-active:nth-child(#{$_right}) ~ .Heidelberg-Page:nth-child(#{$_left})
@@ -73,21 +68,8 @@ $_right: odd
 
 // right pages after active spread
 .Heidelberg-Page.is-active:nth-child(#{$_right}) ~ .Heidelberg-Page:nth-child(#{$_right})
-  transform: rotateY(0)
+  transform: rotateY(0deg)
 
-// page transistioning out
-.Heidelberg-Page.was-active
-  z-index: 1
-
-// Stacking order of concurrent animating pages
-.Heidelberg-Page.is-animating:nth-child(#{$_right})
-  z-index: 4
-
-.Heidelberg-Page.is-animating:nth-child(#{$_right}) ~ .Heidelberg-Page.is-animating
-  z-index: 3
-
-.Heidelberg-Page.is-animating + .Heidelberg-Page:not(.is-animating):nth-child(#{$_right})
-  z-index: 1
 
 
 // If JS fails show first spread
@@ -120,3 +102,18 @@ $_right: odd
 // Needs to be on own line to work in IE8
 .no-csstransforms3d .Heidelberg-Page.with-Spread.is-active + .Heidelberg-Page.with-Spread.is-active .Heidelberg-Spread
   left: -100%
+
+// Internet 10 only selector - checks Heidelberg HTMLElement attribute: data-useragent
+.Heidelberg-Book[data-useragent*='MSIE 10.0']
+
+  .Heidelberg-Page
+    opacity: 0
+
+  .Heidelberg-Page.is-active
+    transition: transform $Heidelberg-duration ease, opacity $Heidelberg-duration ease
+    opacity: 1
+
+  .Heidelberg-Page.was-active
+    transition-delay: 2s
+    transition: transform $Heidelberg-duration ease, opacity $Heidelberg-duration ease
+    opacity: 0

@@ -50,10 +50,9 @@
     // PRIVATE VARIABLES
     // Main element always a jQuery object
     this.el = (el instanceof $) ? el : $(el);
-
+    this.el.attr('data-useragent', navigator.userAgent); // Add user agent attribute to HTMLElement - used in CSS selection ( for IE10 detection )
     // RUN
     this.init();
-
   }
 
   Heidelberg.prototype.init = function() {
