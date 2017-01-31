@@ -173,7 +173,7 @@
     if ( options.hasSpreads ) {
       index.activeRight = els.pagesActive.eq(1).index();
       index.activeLeft  = index.activeRight - 1;
-    } else {// Single page spreads ( JHome )
+    } else {// Single page spreads
       index.activeLeft  = els.pagesActive.eq(0).index(); // Note about fix: the double spread code above caused code to wrap to bottom of array . This is the fix for double spreads.
       index.activeRight = index.activeLeft + 1;
     }
@@ -218,7 +218,6 @@
       index.targetSibling = direction == 'forwards' ? index.activeRight + 2 : index.activeLeft - 2;
     }
 
-    // JHome - double spreads - Fix for 'is-active' pages not being correctly offset from the stars
     if ( ! options.hasSpreads && direction == 'forwards' && index.target == 2 ) {
       index.target = 1;
       index.targetSibling = 2;
