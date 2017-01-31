@@ -41,6 +41,7 @@
       arrowKeys: true,
       concurrentAnimations: null,
       limitPageTurns: true,
+      initialActivePage: 0,
       onPageTurn: function() {},
       onSpreadSetup: function() {}
     };
@@ -77,14 +78,26 @@
     els.pagesLeft  = $('.Heidelberg-Page:nth-child('+leftFunction+')', el);
     els.pagesRight = $('.Heidelberg-Page:nth-child('+rightFunction+')', el);
 
+    // if initialActivePage is odd, we substract one.
+    var initialActivePage = options.initialActivePage & 1
+      ? options.initialActivePage - 1
+      : options.initialActivePage;
+
     if(!options.canClose) {
       var coverEl = $('<div />').addClass('Heidelberg-HiddenCover');
       el.prepend(coverEl.clone());
       el.append(coverEl.clone());
-      els.pages.eq(0).add(els.pages.eq(1)).addClass('is-active');
+
+      els.pages.eq(initialActivePage).add(
+        els.pages.eq(initialActivePage + 1)).addClass('is-active');
     }
     else {
-      els.pages.eq(0).addClass('is-active');
+      if (options.initialActivePage !== 0) {
+        els.pages.eq(initialActivePage).add(
+          els.pages.eq(initialActivePage + 1)).addClass('is-active');
+      } else {
+        els.pages.eq(0).addClass('is-active');
+      }
     }
 
     els.previousTrigger = els.pagesLeft.add(options.previousButton);
@@ -229,6 +242,5 @@
     options.onSpreadSetup(el);
     $(this).trigger('spreadSetup.heidelberg', el);
   };
-  
   return Heidelberg;
 });

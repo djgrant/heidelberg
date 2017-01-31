@@ -15,6 +15,7 @@ $('#jump').on('click', function() {
 });
 
 var book2 = new Heidelberg($('#Heidelberg-example-2'), {
+  initialActivePage: 2,
   canClose: true,
   arrowKeys: false,
   concurrentAnimations: 5
