@@ -79,20 +79,22 @@
     els.pagesRight = $('.Heidelberg-Page:nth-child('+rightFunction+')', el);
 
     // if initialActivePage is odd, we substract one.
-    var initialActivePage = options.initialActivePage&1 ?
-      options.initialActivePage-1: options.initialActivePage;
+    var initialActivePage = options.initialActivePage & 1
+      ? options.initialActivePage - 1
+      : options.initialActivePage;
+
     if(!options.canClose) {
       var coverEl = $('<div />').addClass('Heidelberg-HiddenCover');
       el.prepend(coverEl.clone());
       el.append(coverEl.clone());
 
       els.pages.eq(initialActivePage).add(
-        els.pages.eq(initialActivePage+1)).addClass('is-active');
+        els.pages.eq(initialActivePage + 1)).addClass('is-active');
     }
     else {
       if (options.initialActivePage !== 0) {
         els.pages.eq(initialActivePage).add(
-          els.pages.eq(initialActivePage+1)).addClass('is-active');
+          els.pages.eq(initialActivePage + 1)).addClass('is-active');
       } else {
         els.pages.eq(0).addClass('is-active');
       }
