@@ -1,6 +1,6 @@
 {
   "name": "heidelberg",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "A Sass powered animated book plugin",
   "main": "js/heidelberg/heidelberg.js",
   "scripts": {
@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/djgrant/heidelberg",
   "dependencies": {
-    "browsernizr": "^1.0.2",
+    "browsernizr": "^2.0.0",
     "jquery": "^1.11.2"
   }
 }

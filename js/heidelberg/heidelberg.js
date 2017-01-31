@@ -51,7 +51,7 @@
     // PRIVATE VARIABLES
     // Main element always a jQuery object
     this.el = (el instanceof $) ? el : $(el);
-
+    this.el.attr('data-useragent', navigator.userAgent); // Add user agent attribute to HTMLElement - used in CSS selection ( for IE10 detection )
     // RUN
     this.init();
 
@@ -170,8 +170,13 @@
       return;
     }
 
-    index.activeRight = els.pagesActive.eq(1).index();
-    index.activeLeft  = index.activeRight - 1;
+    if ( options.hasSpreads ) {
+      index.activeRight = els.pagesActive.eq(1).index();
+      index.activeLeft  = index.activeRight - 1;
+    } else {// Single page spreads ( JHome )
+      index.activeLeft  = els.pagesActive.eq(0).index(); // Note about fix: the double spread code above caused code to wrap to bottom of array . This is the fix for double spreads.
+      index.activeRight = index.activeLeft + 1;
+    }
 
     var isFirstPage = els.pages.first().index() == index.activeLeft && direction == 'back';
     var isLastPage  = els.pages.last().index() == index.activeRight && direction == 'forwards';
@@ -183,6 +188,7 @@
     if(typeof arg == 'number') {
       var isOdd         = arg & 1;
       var isRight       = options.canClose ? isOdd : !isOdd;
+
       index.targetRight = isRight ? arg : arg + 1;
       index.targetLeft  = index.targetRight - 1;
 
@@ -199,10 +205,23 @@
         index.target        = index.targetRight;
         index.targetSibling = index.target - 1;
       }
+
+      if ( ! options.hasSpreads )
+      {
+        index.target = index.target - 1;
+        index.targetSibling = index.targetSibling - 1;
+      }
+
     }
     else {
       index.target        = direction == 'forwards' ? index.activeRight + 1 : index.activeLeft - 1;
       index.targetSibling = direction == 'forwards' ? index.activeRight + 2 : index.activeLeft - 2;
+    }
+
+    // JHome - double spreads - Fix for 'is-active' pages not being correctly offset from the stars
+    if ( ! options.hasSpreads && direction == 'forwards' && index.target == 2 ) {
+      index.target = 1;
+      index.targetSibling = 2;
     }
 
     els.pagesAnimatingOut = (direction == 'back') ? els.pagesActive.first() : els.pagesActive.last();
