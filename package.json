@@ -20,6 +20,6 @@
   "homepage": "https://github.com/djgrant/heidelberg",
   "dependencies": {
     "browsernizr": "^2.0.0",
-    "jquery": "^1.11.2"
+    "jquery": "^3.4.1"
   }
 }
